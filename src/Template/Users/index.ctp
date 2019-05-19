@@ -8,6 +8,10 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New User'), ['action' => 'add']) ?></li>
+        <li><a href="Bookstores" target="_blank">Bookstores</a></li>
+        <li><a href="Books" target="_blank">Books</a></li>
+        <li><a href="Invoices" target="_blank">Invoices</a></li>
+        <li><a href="Stocks" target="_blank">Stocks</a> </li>
     </ul>
 </nav>
 <div class="users index large-9 medium-8 columns content">
@@ -15,30 +19,30 @@
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('userID') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('username') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('password') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('phone') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('email') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('role') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('phone') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('address') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('authorId') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($users as $user): ?>
             <tr>
-                <td><?= $this->Number->format($user->id) ?></td>
+                <td><?= $this->Number->format($user->userID) ?></td>
                 <td><?= h($user->username) ?></td>
                 <td><?= h($user->password) ?></td>
-                <td><?= h($user->phone) ?></td>
                 <td><?= h($user->email) ?></td>
+                <td><?= h($user->role) ?></td>
+                <td><?= h($user->phone) ?></td>
                 <td><?= h($user->address) ?></td>
-                <td><?= h($user->authorId) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $user->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]) ?>
+                    <?= $this->Html->link(__('View'), ['action' => 'view', $user->userID]) ?>
+                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->userID]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $user->userID], ['confirm' => __('Are you sure you want to delete # {0}?', $user->userID)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

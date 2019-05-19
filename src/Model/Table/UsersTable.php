@@ -31,8 +31,8 @@ class UsersTable extends Table
         parent::initialize($config);
 
         $this->setTable('users');
-        $this->setDisplayField('name');
-        $this->setPrimaryKey('id');
+        $this->setDisplayField('userID');
+        $this->setPrimaryKey('userID');
     }
 
     /**
@@ -44,42 +44,37 @@ class UsersTable extends Table
     public function validationDefault(Validator $validator)
     {
         $validator
-            ->integer('id')
-            ->allowEmptyString('id', 'create')
-            ->add('id', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+            ->integer('userID')
+            ->allowEmptyString('userID', 'create');
 
         $validator
             ->scalar('username')
             ->maxLength('username', 200)
-            ->requirePresence('username', 'create')
-            ->allowEmptyString('username', false);
+            ->allowEmptyString('username');
 
         $validator
             ->scalar('password')
             ->maxLength('password', 200)
-            ->requirePresence('password', 'create')
-            ->allowEmptyString('password', false);
-
-        $validator
-            ->scalar('phone')
-            ->maxLength('phone', 11)
-            ->requirePresence('phone', 'create')
-            ->allowEmptyString('phone', false);
+            ->allowEmptyString('password');
 
         $validator
             ->email('email')
             ->allowEmptyString('email');
 
         $validator
+            ->scalar('role')
+            ->maxLength('role', 200)
+            ->allowEmptyString('role');
+
+        $validator
+            ->scalar('phone')
+            ->maxLength('phone', 200)
+            ->allowEmptyString('phone');
+
+        $validator
             ->scalar('address')
             ->maxLength('address', 200)
             ->allowEmptyString('address');
-
-        $validator
-            ->scalar('authorId')
-            ->maxLength('authorId', 200)
-            ->requirePresence('authorId', 'create')
-            ->allowEmptyString('authorId', false);
 
         return $validator;
     }
@@ -95,7 +90,6 @@ class UsersTable extends Table
     {
         $rules->add($rules->isUnique(['username']));
         $rules->add($rules->isUnique(['email']));
-        $rules->add($rules->isUnique(['id']));
 
         return $rules;
     }
